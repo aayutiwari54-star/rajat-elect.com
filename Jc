@@ -1,0 +1,74 @@
+// Put WhatsApp number here (no +, no spaces). Replace if needed.
+const WHATSAPP_NUMBER = "917050060834";
+
+document.getElementById('year').textContent = new Date().getFullYear();
+
+function scrollToCategory(cat){
+  // focus to products filtered by category
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach(c => {
+    if(cat === 'tv') c.style.display = c.dataset.category === 'tv' ? '' : 'none';
+    if(cat === 'mobile') c.style.display = c.dataset.category === 'mobile' ? '' : 'none';
+    if(cat === 'washing') c.style.display = c.dataset.category === 'washing' ? '' : 'none';
+  });
+  location.hash = '#products';
+  // small delay then scroll
+  setTimeout(()=>document.getElementById('products').scrollIntoView({behavior:'smooth'}),200);
+}
+
+// --- Order Modal logic ---
+const modal = document.getElementById('orderModal');
+const modalProductName = document.getElementById('modalProductName');
+const inputProductName = document.getElementById('productName');
+
+function openOrderForm(button){
+  const name = button.getAttribute('data-name') || 'Product';
+  modalProductName.textContent = `Order — ${name}`;
+  inputProductName.value = name;
+  modal.setAttribute('aria-hidden','false');
+  // try to prefill phone if the user is on mobile and navigator available (optional)
+}
+
+function closeOrderForm(){
+  modal.setAttribute('aria-hidden','true');
+  document.getElementById('orderForm').reset();
+  // restore all product cards (in case user filtered)
+  const cards = document.querySelectorAll('.product-card');
+  cards.forEach(c => c.style.display = '');
+}
+
+// submit: open whatsapp with prefilled message
+function submitOrder(e){
+  e.preventDefault();
+  const product = document.getElementById('productName').value;
+  const qty = document.getElementById('quantity').value || 1;
+  const name = document.getElementById('customerName').value.trim();
+  const phone = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
+
+  if(!name || !phone || !address){
+    alert('Please fill all required fields.');
+    return;
+  }
+
+  // build message
+  const msg =
+`Hello Rajat Electronics,
+I want to place an order.
+
+Product: ${product}
+Quantity: ${qty}
+
+Customer name: ${name}
+Phone: ${phone}
+Delivery address: ${address}
+
+Please confirm the price and delivery time.`;
+
+  // open WhatsApp. Use wa.me URL
+  const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+
+  // optionally close modal
+  closeOrderForm();
+}

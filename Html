@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Rajat Electronics</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="logo">
+        <!-- Simple text-logo; replace with image if you have one -->
+        <svg width="36" height="36" viewBox="0 0 100 100" aria-hidden>
+          <rect x="10" y="10" width="80" height="80" rx="12" fill="#0a66ff"></rect>
+          <path d="M28 62 L44 35 L58 62 Z" fill="white"></path>
+        </svg>
+        <div class="brand">
+          <strong>Rajat</strong> Electronics
+        </div>
+      </div>
+
+      <nav class="nav">
+        <a href="#home">Home</a>
+        <a href="#categories">Categories</a>
+        <a href="#products">Products</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="home" class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <h1>Best Electronics at Fair Prices</h1>
+          <p>TVs, Mobile Phones, Washing Machines — genuine products, fast delivery.</p>
+          <a class="btn" href="#products">Shop Now</a>
+        </div>
+        <div class="hero-image">
+          <!-- placeholder -->
+          <div class="phone-graphic">📺📱🧼</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="categories" class="categories container">
+      <h2>Categories</h2>
+      <div class="category-grid">
+        <div class="cat-card" onclick="scrollToCategory('tv')">
+          <div class="cat-emoji">📺</div>
+          <h3>TV</h3>
+          <p>Smart TVs, LED, OLED</p>
+        </div>
+        <div class="cat-card" onclick="scrollToCategory('mobile')">
+          <div class="cat-emoji">📱</div>
+          <h3>Mobile Phones</h3>
+          <p>Latest models & accessories</p>
+        </div>
+        <div class="cat-card" onclick="scrollToCategory('washing')">
+          <div class="cat-emoji">🧼</div>
+          <h3>Washing Machines</h3>
+          <p>Top-load & front-load</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="products" class="products container">
+      <h2>Featured Products</h2>
+
+      <div class="products-grid">
+        <!-- TV -->
+        <div class="product-card" data-category="tv">
+          <img src="https://via.placeholder.com/300x180?text=Samsung+55%22+TV" alt="Samsung 55 TV"/>
+          <h4>Samsung 55" Smart TV</h4>
+          <p class="price">₹54,999</p>
+          <button class="btn-outline" onclick="openOrderForm(this)" data-name='Samsung 55" Smart TV' data-price="54999">Order Now</button>
+        </div>
+
+        <div class="product-card" data-category="mobile">
+          <img src="https://via.placeholder.com/300x180?text=Redmi+Note+12" alt="Redmi Note 12"/>
+          <h4>Xiaomi Redmi Note 12</h4>
+          <p class="price">₹12,999</p>
+          <button class="btn-outline" onclick="openOrderForm(this)" data-name="Xiaomi Redmi Note 12" data-price="12999">Order Now</button>
+        </div>
+
+        <div class="product-card" data-category="washing">
+          <img src="https://via.placeholder.com/300x180?text=LG+6kg+Washer" alt="LG Washing Machine"/>
+          <h4>LG 6kg Front Load</h4>
+          <p class="price">₹24,499</p>
+          <button class="btn-outline" onclick="openOrderForm(this)" data-name="LG 6kg Front Load" data-price="24499">Order Now</button>
+        </div>
+
+        <!-- Add more product-cards here -->
+      </div>
+    </section>
+
+    <section id="why" class="container why-choose">
+      <h2>Why Shop With Us?</h2>
+      <ul>
+        <li>Genuine products — warranty provided</li>
+        <li>Easy WhatsApp ordering</li>
+        <li>Fast delivery to your location</li>
+      </ul>
+    </section>
+
+    <section id="contact" class="container contact">
+      <h2>Contact & Store</h2>
+      <p>Phone/WhatsApp: <a href="https://wa.me/917050060834" target="_blank">+91 70500 60834</a></p>
+      <p>Email: info@rajatelectronics.example (replace with real)</p>
+      <p>Address: Your shop address here</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <small>© <span id="year"></span> Rajat Electronics — All rights reserved.</small>
+    </div>
+  </footer>
+
+  <!-- Order Modal -->
+  <div id="orderModal" class="modal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeOrderForm()">✕</button>
+      <h3 id="modalProductName">Order</h3>
+
+      <form id="orderForm" onsubmit="submitOrder(event)">
+        <label>
+          Product
+          <input type="text" id="productName" name="productName" readonly />
+        </label>
+
+        <label>
+          Quantity
+          <input type="number" id="quantity" name="quantity" value="1" min="1" required />
+        </label>
+
+        <label>
+          Your Name
+          <input type="text" id="customerName" name="customerName" placeholder="Full name" required />
+        </label>
+
+        <label>
+          Phone Number
+          <input type="tel" id="customerPhone" name="customerPhone" placeholder="+91XXXXXXXXXX" required />
+        </label>
+
+        <label>
+          Delivery Address
+          <textarea id="customerAddress" name="customerAddress" placeholder="Full address with landmarks" required></textarea>
+        </label>
+
+        <div class="form-actions">
+          <button type="submit" class="btn">Send Order on WhatsApp</button>
+          <button type="button" class="btn-outline" onclick="closeOrderForm()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
